@@ -7,9 +7,25 @@
 //
 
 #include <iostream>
+using namespace std;
+#include "dArray.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+    int frameSize;
+    string inputFile, outputFile;
+    DArray pageNumbers;
+    
+    if(argc < 4)
+    {
+        cerr << "Insufficient command line arguments. Program Terminated." <<endl;
+        return -1;
+    }
+    frameSize = atoi(argv[1]);
+    inputFile = argv[2];
+    outputFile = argv[3];
+    
+    pageNumbers.readIn(inputFile);
+    
+    
+    
 }
