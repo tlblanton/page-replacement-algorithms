@@ -63,11 +63,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "140"
+            argument = "4"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "pg-reference.txt"
+            argument = "smallSample.txt"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

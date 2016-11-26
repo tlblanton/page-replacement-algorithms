@@ -10,26 +10,32 @@
 #define DArray_h
 
 #include <iostream>
+#include "Page.h"
 using namespace std;
 
 
 class DArray
 {
 public:
-    int *arr;
+    Page *arr;
     int capactiy;
     int size;
     
     DArray();
     
+    DArray(int customCapacity, bool populateWithZero);
+    
     void resize();
+    
+    void print();
     
     void insert(int newInt);
     
     int readIn(string fileName);
     
-    void lookBack();
-
+    bool exists(int checkFor);
+    
+    void fifoReplace(int newPageNumber);
 };
 
 #endif /* DArray_h */

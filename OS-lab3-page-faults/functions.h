@@ -12,7 +12,12 @@
 #include <stdio.h>
 #include "DArray.h"
 
-void simulateMemory(DArray &pageNumbers);
+int simulateMemoryFIFO(DArray &pageNumbers, int frameSize);
+int simulateMemoryLRU(DArray &pageNumbers, int frameSize);
+int simulateMemoryMFU(DArray &pageNumbers, int frameSize);
+int simulateMemoryOptimal(DArray &pageNumbers, int frameSize);
+
+int writeToFile(string outputFileName);
 
 
 #endif /* functions_h */

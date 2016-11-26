@@ -10,6 +10,7 @@
 		50BDC08E1DE8D64E00588FE3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50BDC08D1DE8D64E00588FE3 /* main.cpp */; };
 		50BDC0961DE8D71F00588FE3 /* DArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50BDC0941DE8D71F00588FE3 /* DArray.cpp */; };
 		50BDC0991DE921ED00588FE3 /* functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50BDC0971DE921ED00588FE3 /* functions.cpp */; };
+		50BDC09C1DE9276B00588FE3 /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50BDC09A1DE9276B00588FE3 /* Page.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		50BDC0951DE8D71F00588FE3 /* DArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DArray.h; sourceTree = "<group>"; };
 		50BDC0971DE921ED00588FE3 /* functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = functions.cpp; sourceTree = "<group>"; };
 		50BDC0981DE921ED00588FE3 /* functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
+		50BDC09A1DE9276B00588FE3 /* Page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Page.cpp; sourceTree = "<group>"; };
+		50BDC09B1DE9276B00588FE3 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +69,10 @@
 				50BDC08D1DE8D64E00588FE3 /* main.cpp */,
 				50BDC0981DE921ED00588FE3 /* functions.h */,
 				50BDC0971DE921ED00588FE3 /* functions.cpp */,
-				50BDC0941DE8D71F00588FE3 /* DArray.cpp */,
 				50BDC0951DE8D71F00588FE3 /* DArray.h */,
+				50BDC0941DE8D71F00588FE3 /* DArray.cpp */,
+				50BDC09B1DE9276B00588FE3 /* Page.h */,
+				50BDC09A1DE9276B00588FE3 /* Page.cpp */,
 			);
 			path = "OS-lab3-page-faults";
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			files = (
 				50BDC0961DE8D71F00588FE3 /* DArray.cpp in Sources */,
 				50BDC0991DE921ED00588FE3 /* functions.cpp in Sources */,
+				50BDC09C1DE9276B00588FE3 /* Page.cpp in Sources */,
 				50BDC08E1DE8D64E00588FE3 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
