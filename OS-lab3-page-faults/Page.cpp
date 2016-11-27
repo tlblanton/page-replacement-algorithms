@@ -15,6 +15,7 @@ Page::Page()
 {
     number = -1;
     place = 0;
+    frequency = 0;
 }
 
 
@@ -28,5 +29,6 @@ Page& Page::operator =(const Page &copyThis)
 {
     number = copyThis.number;
     place = copyThis.place;
+    frequency = copyThis.frequency;
     return *this;
 }

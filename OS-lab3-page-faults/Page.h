@@ -14,7 +14,7 @@
 class Page
 {
 public:
-    int number, place;
+    int number, place, frequency;
     
     Page();
     

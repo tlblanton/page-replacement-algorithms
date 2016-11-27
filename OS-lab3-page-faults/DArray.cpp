@@ -11,6 +11,7 @@
 #include "Page.h"
 using namespace std;
 
+
 /*
  *  CONSTRUCTOR
  *
@@ -21,6 +22,7 @@ DArray::DArray()
     arr = new Page[capactiy];
     size = 0;
 }
+
 
 /*
  * CONSTRUCTOR - CUSTOM SIZE
@@ -45,6 +47,7 @@ DArray::DArray(int customCapacity, bool populateWithZero)
     }
 }
 
+
 /*
  * RESIZE
  *
@@ -66,6 +69,7 @@ void DArray::resize()
     capactiy = newCap;
 }
 
+
 /*
  * Print
  *
@@ -75,10 +79,11 @@ void DArray::print()
     cout << "----------------" << endl;
     for(int i = 0; i < size; ++i)
     {
-        cout << arr[i].number << " : " << arr[i].place << endl;
+        cout << arr[i].number << " : " << arr[i].place << " : "  <<  arr[i].frequency << endl;
     }
     cout << "----------------" << endl;
 }
+
 
 /*
  * INSERT
@@ -100,11 +105,13 @@ void DArray::insert(int newInt)
     //creating new page. It has place of 1 because it is the newest variable in the array
     Page tempPage(newInt);
     tempPage.place = 1;
+    tempPage.frequency = 0;
     
     //putting this new page in the array
     arr[size] = tempPage;
     ++size;
 }
+
 
 /*
  * READIN
@@ -149,18 +156,54 @@ bool DArray::exists(int checkFor)
 
 
 /*
+ * subscript
+ * NOTE: This returns the FIRST instance of the page number being cheked for
+ */
+int DArray::subscript(int checkFor)
+{
+    for(int i = 0; i < size; ++i)
+    {
+        if(arr[i].number == checkFor)
+        {
+            return i;
+        }
+    }
+    cerr << "Could not locate number in array." << endl;
+    return -1;
+}
+
+
+/*
  * fifoReplace
  *
  */
 void DArray::fifoReplace(int newPageNumber)
 {
+    
+    for(int i = 1; i < size; ++i)
+    {
+        arr[i-1].number = arr[i].number;
+        arr[i-1].place = arr[i].place;
+    }
+    arr[size-1].number = newPageNumber;
+    arr[size-1].place = 1;
+}
+
+
+/*
+ * lruReplace
+ *
+ */
+void  DArray::lruReplace(int newPageNumber)
+{
+    //the page with the maximum number will be the one that was used LEAST RECENTLY
     int max = 0;
     for(int i = 1; i < size; ++i)
     {
-            if(arr[i].place > arr[max].place)
-            {
-                max = i;
-            }
+        if(arr[i].place > arr[max].place)
+        {
+            max = i;
+        }
     }
     
     for(int i = 0; i < size; ++i)
@@ -172,12 +215,37 @@ void DArray::fifoReplace(int newPageNumber)
     }
     arr[max].number = newPageNumber;
     arr[max].place = 1;
-    print();
-    
 }
 
 
+/*
+ * mfuReplace
+ *
+ */
+void  DArray::mfuReplace(int newPageNumber, DArray& freqArray)
+{
+    int maxFreqSub = 0;
+    for(int x = 1; x < size; ++x)
+    {
+        if(arr[x].frequency > arr[maxFreqSub].frequency)
+        {
+            maxFreqSub = x;
+        }
+    }
+    
+    arr[maxFreqSub].number = newPageNumber;
+    //don't have to worry about place here, only about frequency, so I am not copying that value over
+}
 
+
+/*
+ * optimalReplace
+ *
+ */
+void  DArray::optimalReplace(int newPageNumber)
+{
+    
+}
 
 
 

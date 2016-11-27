@@ -35,7 +35,15 @@ public:
     
     bool exists(int checkFor);
     
+    int subscript(int checkFor);
+    
     void fifoReplace(int newPageNumber);
+    
+    void lruReplace(int newPageNumber);
+    
+    void mfuReplace(int newPageNumber, DArray& freqArray);
+    
+    void optimalReplace(int newPageNumber);
 };
 
 #endif /* DArray_h */
