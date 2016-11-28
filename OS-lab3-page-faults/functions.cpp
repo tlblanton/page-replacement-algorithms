@@ -59,17 +59,45 @@ int simulateMemoryFIFO(DArray &pageNumbers, int frameSize, float& fifo2000, floa
             }
         }
     }
-    fifo10000 = (float)pageFaults / 10000;
+    
+    if(pageNumbers.size >= 10000)
+    {
+        fifo10000 = (float)pageFaults / 10000;
+    }
     return pageFaults;
 }
 
-int simulateMemoryLRU(DArray &pageNumbers, int frameSize)
+int simulateMemoryLRU(DArray &pageNumbers, int frameSize, float& lru2000, float&lru4000, float& lru6000, float& lru8000, float& lru10000)
 {
     DArray frame(frameSize, false);  //creates a frame of frameSize size
     
     int pageFaults = 0;
     for(int i = 0; i < pageNumbers.size; ++i)
     {
+        switch(i)
+        {
+            case 2000:
+            {
+                lru2000 = (float)pageFaults / 2000.0;
+                break;
+            }
+            case 4000:
+            {
+                lru4000 = (float)pageFaults / 4000;
+                break;
+            }
+            case 6000:
+            {
+                lru6000 = (float)pageFaults / 6000;
+                break;
+            }
+            case 8000:
+            {
+                lru8000 = (float)pageFaults / 8000;
+                break;
+            }
+        }
+        
         if(!frame.exists(pageNumbers.arr[i].number))
         {
             ++pageFaults;
@@ -103,10 +131,15 @@ int simulateMemoryLRU(DArray &pageNumbers, int frameSize)
         }
     }
     
+    if(pageNumbers.size >= 10000)
+    {
+        lru10000 =(float)pageFaults / 10000;
+    }
+    
     return pageFaults;
 }
 
-int simulateMemoryMFU(DArray &pageNumbers, int frameSize)
+int simulateMemoryMFU(DArray &pageNumbers, int frameSize, float& mfu2000, float& mfu4000, float& mfu6000, float& mfu8000, float& mfu10000)
 {
     DArray frame(frameSize, false);  //creates a frame of frameSize size
     DArray freqArray;
@@ -131,6 +164,30 @@ int simulateMemoryMFU(DArray &pageNumbers, int frameSize)
     //this FOR loop is the actual MFU algorithm
     for(int i = 0; i < pageNumbers.size; ++i)
     {
+        switch(i)
+        {
+            case 2000:
+            {
+                mfu2000 = (float)pageFaults / 2000.0;
+                break;
+            }
+            case 4000:
+            {
+                mfu4000 = (float)pageFaults / 4000;
+                break;
+            }
+            case 6000:
+            {
+                mfu6000 = (float)pageFaults / 6000;
+                break;
+            }
+            case 8000:
+            {
+                mfu8000 = (float)pageFaults / 8000;
+                break;
+            }
+        }
+        
         if(!frame.exists(pageNumbers.arr[i].number))
         {
             ++pageFaults;
@@ -143,17 +200,16 @@ int simulateMemoryMFU(DArray &pageNumbers, int frameSize)
                 frame.mfuReplace(pageNumbers.arr[i].number, freqArray);
             }
         }
-        
     }
-    
-    
-    
-    
+    if(pageNumbers.size >= 10000)
+    {
+        mfu10000 = (float)pageFaults / 10000;
+    }
     
     return pageFaults;
 }
 
-int simulateMemoryOptimal(DArray &pageNumbers, int frameSize)
+int simulateMemoryOptimal(DArray &pageNumbers, int frameSize, float& optimal2000, float& optimal4000, float& optimal6000, float& optimal8000, float& optimal10000)
 {
     int pageFaults = 0;
     
@@ -161,6 +217,31 @@ int simulateMemoryOptimal(DArray &pageNumbers, int frameSize)
     
     for(int i = 0; i < pageNumbers.size; ++i)
     {
+        switch(i)
+        {
+            case 2000:
+            {
+                optimal2000 = (float)pageFaults / 2000.0;
+                break;
+            }
+            case 4000:
+            {
+                optimal4000 = (float)pageFaults / 4000;
+                break;
+            }
+            case 6000:
+            {
+                optimal6000 = (float)pageFaults / 6000;
+                break;
+            }
+            case 8000:
+            {
+                optimal8000 = (float)pageFaults / 8000;
+                break;
+            }
+        }
+
+        
         if(!frame.exists(pageNumbers.arr[i].number))
         {
             ++pageFaults;
@@ -174,8 +255,10 @@ int simulateMemoryOptimal(DArray &pageNumbers, int frameSize)
             }
         }
     }
-    
-    
+    if(pageNumbers.size >= 10000)
+    {
+        optimal10000 = (float)pageFaults / 10000;
+    }
     
     
     
@@ -192,20 +275,20 @@ int writeToFile(string outputFileName, int frameSize, int fifoTotal, float fifo2
         return -1;
     }
     
-    outFile << setw(30) << "=======================================================================" << endl;
-    outFile << setw(60) << "Page Replacement Algorithm Simulation (frame size = " << frameSize <<")" << endl;
-    outFile << setw(30) << "=======================================================================" << endl;
+    outFile << setw(30) << "=============================================================================" << endl;
+    outFile << setw(66) << "Page Replacement Algorithm Simulation (frame size = " << frameSize <<")" << endl;
+    outFile << setw(30) << "=============================================================================" << endl;
     outFile << setw(62) << "Page Fault Rates" << endl << endl;
-    outFile << "Algorithm" << setw(21) << "Total Page Faults" << setw(10) << "2000" << setw(10) << "4000" << setw(10) << "6000" << setw(8) << "10000" << endl;
-    outFile << setw(30) << "-----------------------------------------------------------------------" << endl;
-    outFile << " FIFO" << setw(18) << fifoTotal << setw(17) << fifo2000 << setw(10) << fifo4000 << setw(10) << fifo6000
-            << setw(8) << fifo10000 << endl;
+    outFile << "Algorithm" << setw(21) << "Total Page Faults" << setw(10) << "2000" << setw(10) << "4000" << setw(10) << "6000" << setw(8) << "8000" << setw(8) << "10000" << endl;
+    outFile << setw(30) << "-----------------------------------------------------------------------------" << endl;
+    outFile << " FIFO" << setw(18) << fifoTotal << setw(17) << setprecision(3) << fifo2000 << setw(10) << fifo4000 << setw(10) << fifo6000
+            << setw(8) << fifo8000 << setw(8) << fifo10000 << endl;
     outFile << " LRU" << setw(19) << lruTotal << setw(17) << lru2000 << setw(10) << lru4000 << setw(10) << lru6000
-            << setw(8) << lru10000 << endl;
+            << setw(8) << lru8000 << setw(8) << lru10000 << endl;
     outFile << " MFU" << setw(19) << mfuTotal << setw(17) << mfu2000 << setw(10) << mfu4000 << setw(10) << mfu6000
-            << setw(8) << mfu10000 << endl;
+            << setw(8) << lru8000 << setw(8) << mfu10000 << endl;
     outFile << " Optimal" << setw(15) << optimalTotal << setw(17) << optimal2000 << setw(10) << optimal4000 << setw(10) << optimal6000
-            << setw(8) << optimal10000 << endl;
+            << setw(8) << optimal8000 << setw(8) <<  optimal10000 << endl;
     
     
     outFile.close();

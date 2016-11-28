@@ -220,7 +220,8 @@ void  DArray::lruReplace(int newPageNumber)
 
 /*
  * mfuReplace
- *
+ * NOTE: if there are multiple numbers in the list that have been used the highest number of times comparitively, then this algorithm removes the first
+ * one it comes across
  */
 void  DArray::mfuReplace(int newPageNumber, DArray& freqArray)
 {
