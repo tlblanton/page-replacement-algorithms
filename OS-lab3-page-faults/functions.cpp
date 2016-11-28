@@ -14,12 +14,35 @@
 
 using namespace std;
 
-int simulateMemoryFIFO(DArray &pageNumbers, int frameSize)
+int simulateMemoryFIFO(DArray &pageNumbers, int frameSize, float& fifo2000, float& fifo4000, float& fifo6000, float& fifo8000, float& fifo10000)
 {
     DArray frame(frameSize, false);  //creates a frame of frameSize size
     int pageFaults = 0;
     for(int i = 0; i < pageNumbers.size; ++i)
     {
+        switch(i)
+        {
+            case 2000:
+            {
+                fifo2000 = (float)pageFaults / 2000.0;
+                break;
+            }
+            case 4000:
+            {
+                fifo4000 = (float)pageFaults / 4000;
+                break;
+            }
+            case 6000:
+            {
+                fifo6000 = (float)pageFaults / 6000;
+                break;
+            }
+            case 8000:
+            {
+                fifo8000 = (float)pageFaults / 8000;
+                break;
+            }
+        }
         // If the page number is not in the frame then that is a page fault and we
         // need to use a replacement algorithm
         if(!frame.exists(pageNumbers.arr[i].number))
@@ -36,6 +59,7 @@ int simulateMemoryFIFO(DArray &pageNumbers, int frameSize)
             }
         }
     }
+    fifo10000 = (float)pageFaults / 10000;
     return pageFaults;
 }
 
@@ -131,9 +155,31 @@ int simulateMemoryMFU(DArray &pageNumbers, int frameSize)
 
 int simulateMemoryOptimal(DArray &pageNumbers, int frameSize)
 {
+    int pageFaults = 0;
+    
     DArray frame(frameSize, false);  //creates a frame of frameSize size
     
-    return -1;
+    for(int i = 0; i < pageNumbers.size; ++i)
+    {
+        if(!frame.exists(pageNumbers.arr[i].number))
+        {
+            ++pageFaults;
+            if(frame.size < frame.capactiy)
+            {
+                frame.insert(pageNumbers.arr[i].number);
+            }
+            else
+            {
+                frame.optimalReplace(pageNumbers.arr[i].number, i, pageNumbers);
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    return pageFaults;
 }
 
 
@@ -150,14 +196,16 @@ int writeToFile(string outputFileName, int frameSize, int fifoTotal, float fifo2
     outFile << setw(60) << "Page Replacement Algorithm Simulation (frame size = " << frameSize <<")" << endl;
     outFile << setw(30) << "=======================================================================" << endl;
     outFile << setw(62) << "Page Fault Rates" << endl << endl;
-    outFile << "Algorithm" << setw(21) << "Total Page Faults" << setw(10) << "2000" << setw(10) << "4000" << setw(10) << "6000" << setw(8) << "1000" << endl;
+    outFile << "Algorithm" << setw(21) << "Total Page Faults" << setw(10) << "2000" << setw(10) << "4000" << setw(10) << "6000" << setw(8) << "10000" << endl;
     outFile << setw(30) << "-----------------------------------------------------------------------" << endl;
-    outFile << " FIFO" << setw(18) << fifoTotal << setw(17) << fifo2000 << setw(10) << fifo4000 << setw(10) << fifo6000 << setw(8) << fifo10000 << endl;
-    outFile << " LRU" << setw(19) << lruTotal << setw(17) << lru2000 << setw(10) << lru4000 << setw(10) << lru6000 << setw(8) << lru10000 << endl;
-    outFile << " MFU" << setw(19) << mfuTotal << setw(17) << mfu2000 << setw(10) << mfu4000 << setw(10) << mfu6000 << setw(8) << mfu10000 << endl;
-    outFile << " Optimal" << setw(15) << optimalTotal << setw(17) << optimal2000 << setw(10) << optimal4000 << setw(10) << optimal6000 << setw(8) << optimal10000 << endl;
-    
-    
+    outFile << " FIFO" << setw(18) << fifoTotal << setw(17) << fifo2000 << setw(10) << fifo4000 << setw(10) << fifo6000
+            << setw(8) << fifo10000 << endl;
+    outFile << " LRU" << setw(19) << lruTotal << setw(17) << lru2000 << setw(10) << lru4000 << setw(10) << lru6000
+            << setw(8) << lru10000 << endl;
+    outFile << " MFU" << setw(19) << mfuTotal << setw(17) << mfu2000 << setw(10) << mfu4000 << setw(10) << mfu6000
+            << setw(8) << mfu10000 << endl;
+    outFile << " Optimal" << setw(15) << optimalTotal << setw(17) << optimal2000 << setw(10) << optimal4000 << setw(10) << optimal6000
+            << setw(8) << optimal10000 << endl;
     
     
     outFile.close();

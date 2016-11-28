@@ -43,7 +43,7 @@ public:
     
     void mfuReplace(int newPageNumber, DArray& freqArray);
     
-    void optimalReplace(int newPageNumber);
+    void optimalReplace(int newPageNumber, int currentSpot, DArray& pageNumbers);
 };
 
 #endif /* DArray_h */

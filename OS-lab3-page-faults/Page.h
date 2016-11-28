@@ -14,7 +14,7 @@
 class Page
 {
 public:
-    int number, place, frequency;
+    int number, place, frequency, distanceFromSpot;
     
     Page();
     

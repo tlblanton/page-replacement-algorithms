@@ -14,7 +14,7 @@ using namespace std;
 #include <stdio.h>
 #include "DArray.h"
 
-int simulateMemoryFIFO(DArray &pageNumbers, int frameSize);
+int simulateMemoryFIFO(DArray &pageNumbers, int frameSize, float& fifo2000, float& fifo4000, float& fifo6000, float& fifo8000, float& fifo10000);
 int simulateMemoryLRU(DArray &pageNumbers, int frameSize);
 int simulateMemoryMFU(DArray &pageNumbers, int frameSize);
 int simulateMemoryOptimal(DArray &pageNumbers, int frameSize);

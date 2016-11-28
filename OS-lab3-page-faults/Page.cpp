@@ -16,12 +16,16 @@ Page::Page()
     number = -1;
     place = 0;
     frequency = 0;
+    distanceFromSpot = 0;
 }
 
 
 Page::Page(int newNum)
 {
     number = newNum;
+    place = 0;
+    frequency = 0;
+    distanceFromSpot = 0;
 }
 
 
