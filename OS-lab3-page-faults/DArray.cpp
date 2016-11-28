@@ -7,7 +7,7 @@
 //
 
 #include <fstream>
-#include "dArray.h"
+#include "DArray.h"
 #include "Page.h"
 using namespace std;
 
@@ -18,7 +18,7 @@ using namespace std;
  */
 DArray::DArray()
 {
-    capactiy = 500;
+    capactiy = 10000;
     arr = new Page[capactiy];
     size = 0;
 }

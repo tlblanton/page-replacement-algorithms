@@ -138,7 +138,7 @@ int simulateMemoryOptimal(DArray &pageNumbers, int frameSize)
 
 
 
-int writeToFile(string outputFileName)
+int writeToFile(string outputFileName, int frameSize, int fifoTotal, float fifo2000, float fifo4000, float fifo6000, float fifo8000, float fifo10000, int lruTotal, float lru2000, float lru4000, float lru6000, float lru8000, float lru10000, int mfuTotal, float mfu2000, float mfu4000, float mfu6000, float mfu8000, float mfu10000, int optimalTotal, float optimal2000, float optimal4000, float optimal6000, float optimal8000, float optimal10000)
 {
     ofstream outFile(outputFileName);
     if(!outFile)
@@ -146,11 +146,21 @@ int writeToFile(string outputFileName)
         return -1;
     }
     
+    outFile << setw(30) << "=======================================================================" << endl;
+    outFile << setw(60) << "Page Replacement Algorithm Simulation (frame size = " << frameSize <<")" << endl;
+    outFile << setw(30) << "=======================================================================" << endl;
+    outFile << setw(62) << "Page Fault Rates" << endl << endl;
+    outFile << "Algorithm" << setw(21) << "Total Page Faults" << setw(10) << "2000" << setw(10) << "4000" << setw(10) << "6000" << setw(8) << "1000" << endl;
+    outFile << setw(30) << "-----------------------------------------------------------------------" << endl;
+    outFile << " FIFO" << setw(18) << fifoTotal << setw(17) << fifo2000 << setw(10) << fifo4000 << setw(10) << fifo6000 << setw(8) << fifo10000 << endl;
+    outFile << " LRU" << setw(19) << lruTotal << setw(17) << lru2000 << setw(10) << lru4000 << setw(10) << lru6000 << setw(8) << lru10000 << endl;
+    outFile << " MFU" << setw(19) << mfuTotal << setw(17) << mfu2000 << setw(10) << mfu4000 << setw(10) << mfu6000 << setw(8) << mfu10000 << endl;
+    outFile << " Optimal" << setw(15) << optimalTotal << setw(17) << optimal2000 << setw(10) << optimal4000 << setw(10) << optimal6000 << setw(8) << optimal10000 << endl;
     
     
     
     
-    
+    outFile.close();
     return 0;
 }
 

@@ -10,12 +10,13 @@
 
 #include <iostream>
 using namespace std;
-#include "dArray.h"
+#include "DArray.h"
 #include "functions.h"
 
 int main(int argc, const char * argv[]) {
     int frameSize;
     int fifoPageFaults, lruPageFaults, mfuPageFaults, optimalPageFaults;
+    float fifo2000, fifo40000, fifo6000, fifo8000, fifo10000, lru2000, lru4000, lru6000, lru8000, lru10000, mfu2000, mfu4000, mfu6000, mfu8000, mfu10000, optimal2000, optimal4000, optimal6000, optimal8000, optimal10000;
     string inputFile, outputFile;
     DArray pageNumbers;
     
@@ -38,7 +39,7 @@ int main(int argc, const char * argv[]) {
     cout << mfuPageFaults << endl;
     optimalPageFaults = simulateMemoryOptimal(pageNumbers, frameSize);
     
-    if(writeToFile(outputFile) == -1)
+    if(writeToFile(outputFile, frameSize, fifoPageFaults, fifo2000, fifo40000, fifo6000, fifo8000, fifo10000, lruPageFaults, lru2000, lru4000, lru6000, lru8000, lru10000, mfuPageFaults, mfu2000, mfu4000, mfu6000, mfu8000, mfu10000, optimalPageFaults, optimal2000, optimal4000, optimal6000, optimal8000, optimal10000) == -1)
     {
         cerr << "Could not open output file. Results not reported. " << endl;
     }
