@@ -6,8 +6,6 @@
 //  Copyright © 2016 Tyler Blanton. All rights reserved.
 //
 
-//-----------TODO: Make MFU work like FIFO when there are multiple items who have the same frequency in the pagenumber list
-
 #include <iostream>
 #include "functions.h"
 #include "DArray.h"
