@@ -248,12 +248,16 @@ void  DArray::optimalReplace(int newPageNumber, int currentSpot, DArray& pageNum
     //give each page it's distanceFromSpot variable
     DArray frameNumbersNotInList;
     bool foundInPageNumbers = false;
+    bool newNumberPlaced = false;
     
     int maxDistanceSub = 0;
     
+    //looping around numbers in frame
     for(int i = 0; i < size; ++i)
     {
         foundInPageNumbers = false;
+        
+        //looping around numbers in page ahead of our currentPosition
         for(int x = (currentSpot+1); x < pageNumbers.size; ++x)
         {
             if(arr[i].number == pageNumbers.arr[x].number)
@@ -270,61 +274,30 @@ void  DArray::optimalReplace(int newPageNumber, int currentSpot, DArray& pageNum
         }
         if(!foundInPageNumbers)
         {
-            frameNumbersNotInList.insert(arr[i].number);
+            //if the number being looked at in the frame is not in the rest of the list, then we replace it with the new one
+            arr[i].number = newPageNumber;
+            newNumberPlaced = true;
+            break;
         }
     }
     
-    //If some numbers in the frame are not in the entire rest of the list then we treat it like FIFO
-    if(frameNumbersNotInList.size != 0)
+    if(!newNumberPlaced)
     {
-        int largestPlaceSub = 0;
-        //find largest place and replace that one
+        int maxDistanceSub = 0;
         for(int i = 1; i < size; ++i)
         {
-            if(arr[i].place > arr[largestPlaceSub].place)
+            if(arr[i].distanceFromSpot > arr[maxDistanceSub].distanceFromSpot)
             {
-                largestPlaceSub = i;
+                maxDistanceSub = i;
             }
         }
-        for(int i = 0; i < size; ++i)
-        {
-            if(i != largestPlaceSub)
-            {
-                ++arr[i].place;
-            }
-        }
-        
-        arr[largestPlaceSub].number = newPageNumber;
-        arr[largestPlaceSub].place = 1;
-        
-    }
-    else
-    {
-        //If all numbers in the frame are in the list then we replace arr[maxDistanceSub] with the new information, but we have to chnage "place" variable accordingly.
-        
-        int placeOfReplacedNumber = arr[maxDistanceSub].place;
-        
-        //putting new page in appropriate spot
         arr[maxDistanceSub].number = newPageNumber;
-        arr[maxDistanceSub].place = 1;
-        
-        for(int i = 0; i < size; ++i)
-        {
-            if(arr[i].place < placeOfReplacedNumber && i != maxDistanceSub)
-            {
-                ++arr[i].place;
-            }
-            //incrementing all the places below the one being inserted
-        }
     }
-    
-    
     //resetting all distanceFromSpot variables for next call to algorithm.
     for(int i = 0; i < size; ++i)
     {
         arr[i].distanceFromSpot = 0;
     }
-
 }
 
 

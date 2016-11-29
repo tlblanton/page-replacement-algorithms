@@ -24,7 +24,7 @@ int simulateMemoryFIFO(DArray &pageNumbers, int frameSize, float& fifo2000, floa
         {
             case 2000:
             {
-                fifo2000 = (float)pageFaults / 2000.0;
+                fifo2000 = (float)pageFaults / 2000;
                 break;
             }
             case 4000:
@@ -78,7 +78,7 @@ int simulateMemoryLRU(DArray &pageNumbers, int frameSize, float& lru2000, float&
         {
             case 2000:
             {
-                lru2000 = (float)pageFaults / 2000.0;
+                lru2000 = (float)pageFaults / 2000;
                 break;
             }
             case 4000:
@@ -168,7 +168,7 @@ int simulateMemoryMFU(DArray &pageNumbers, int frameSize, float& mfu2000, float&
         {
             case 2000:
             {
-                mfu2000 = (float)pageFaults / 2000.0;
+                mfu2000 = (float)pageFaults / 2000;
                 break;
             }
             case 4000:
@@ -221,7 +221,7 @@ int simulateMemoryOptimal(DArray &pageNumbers, int frameSize, float& optimal2000
         {
             case 2000:
             {
-                optimal2000 = (float)pageFaults / 2000.0;
+                optimal2000 = (float)pageFaults / 2000;
                 break;
             }
             case 4000:
@@ -241,7 +241,6 @@ int simulateMemoryOptimal(DArray &pageNumbers, int frameSize, float& optimal2000
             }
         }
 
-        
         if(!frame.exists(pageNumbers.arr[i].number))
         {
             ++pageFaults;
@@ -259,9 +258,7 @@ int simulateMemoryOptimal(DArray &pageNumbers, int frameSize, float& optimal2000
     {
         optimal10000 = (float)pageFaults / 10000;
     }
-    
-    
-    
+
     return pageFaults;
 }
 
@@ -279,7 +276,8 @@ int writeToFile(string outputFileName, int frameSize, int fifoTotal, float fifo2
     outFile << setw(66) << "Page Replacement Algorithm Simulation (frame size = " << frameSize <<")" << endl;
     outFile << setw(30) << "=============================================================================" << endl;
     outFile << setw(62) << "Page Fault Rates" << endl << endl;
-    outFile << "Algorithm" << setw(21) << "Total Page Faults" << setw(10) << "2000" << setw(10) << "4000" << setw(10) << "6000" << setw(8) << "8000" << setw(8) << "10000" << endl;
+    outFile << "Algorithm" << setw(21) << "Total Page Faults" << setw(10) << "2000" << setw(10) << "4000" << setw(10) << "6000"
+            << setw(8) << "8000" << setw(8) << "10000" << endl;
     outFile << setw(30) << "-----------------------------------------------------------------------------" << endl;
     outFile << " FIFO" << setw(18) << fifoTotal << setw(17) << setprecision(3) << fifo2000 << setw(10) << fifo4000 << setw(10) << fifo6000
             << setw(8) << fifo8000 << setw(8) << fifo10000 << endl;

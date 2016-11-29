@@ -30,6 +30,8 @@ int main(int argc, const char * argv[]) {
     outputFile = argv[3];
     
     pageNumbers.readIn(inputFile);
+    
+    
 //    cout << "--" << frameSize << "--" << endl;
     
     fifoPageFaults = simulateMemoryFIFO(pageNumbers, frameSize, fifo2000, fifo40000, fifo6000, fifo8000, fifo10000);
