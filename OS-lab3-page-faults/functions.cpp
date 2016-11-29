@@ -14,6 +14,11 @@
 
 using namespace std;
 
+
+/*
+ * simulateMemoryFIFO
+ *
+ */
 int simulateMemoryFIFO(DArray &pageNumbers, int frameSize, float& fifo2000, float& fifo4000, float& fifo6000, float& fifo8000, float& fifo10000)
 {
     DArray frame(frameSize, false);  //creates a frame of frameSize size
@@ -67,6 +72,11 @@ int simulateMemoryFIFO(DArray &pageNumbers, int frameSize, float& fifo2000, floa
     return pageFaults;
 }
 
+
+/*
+ * simulateMemoryLRU
+ *
+ */
 int simulateMemoryLRU(DArray &pageNumbers, int frameSize, float& lru2000, float&lru4000, float& lru6000, float& lru8000, float& lru10000)
 {
     DArray frame(frameSize, false);  //creates a frame of frameSize size
@@ -139,6 +149,10 @@ int simulateMemoryLRU(DArray &pageNumbers, int frameSize, float& lru2000, float&
     return pageFaults;
 }
 
+/*
+ * simulateMemoryMFU
+ *
+ */
 int simulateMemoryMFU(DArray &pageNumbers, int frameSize, float& mfu2000, float& mfu4000, float& mfu6000, float& mfu8000, float& mfu10000)
 {
     DArray frame(frameSize, false);  //creates a frame of frameSize size
@@ -209,6 +223,11 @@ int simulateMemoryMFU(DArray &pageNumbers, int frameSize, float& mfu2000, float&
     return pageFaults;
 }
 
+
+/*
+ * simulateMemoryOptimal
+ *
+ */
 int simulateMemoryOptimal(DArray &pageNumbers, int frameSize, float& optimal2000, float& optimal4000, float& optimal6000, float& optimal8000, float& optimal10000)
 {
     int pageFaults = 0;
@@ -263,7 +282,10 @@ int simulateMemoryOptimal(DArray &pageNumbers, int frameSize, float& optimal2000
 }
 
 
-
+/*
+ * writeToFile
+ *
+ */
 int writeToFile(string outputFileName, int frameSize, int fifoTotal, float fifo2000, float fifo4000, float fifo6000, float fifo8000, float fifo10000, int lruTotal, float lru2000, float lru4000, float lru6000, float lru8000, float lru10000, int mfuTotal, float mfu2000, float mfu4000, float mfu6000, float mfu8000, float mfu10000, int optimalTotal, float optimal2000, float optimal4000, float optimal6000, float optimal8000, float optimal10000)
 {
     ofstream outFile(outputFileName);

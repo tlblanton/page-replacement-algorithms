@@ -235,7 +235,6 @@ void  DArray::mfuReplace(int newPageNumber, DArray& freqArray)
     }
     
     arr[maxFreqSub].number = newPageNumber;
-    //don't have to worry about place here, only about frequency, so I am not copying that value over
 }
 
 
@@ -299,22 +298,3 @@ void  DArray::optimalReplace(int newPageNumber, int currentSpot, DArray& pageNum
         arr[i].distanceFromSpot = 0;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
